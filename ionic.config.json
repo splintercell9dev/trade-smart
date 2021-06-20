@@ -1,0 +1,7 @@
+{
+  "name": "trade-smart",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

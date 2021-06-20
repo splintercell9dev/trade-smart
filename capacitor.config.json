@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "trade-smart",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
