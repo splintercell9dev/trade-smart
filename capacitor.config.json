@@ -1,6 +1,6 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "trade-smart",
+	"appId": "com.splintercell9.tradesmart",
+	"appName": "Trade Smart",
 	"webDir": "www",
 	"bundledWebRuntime": false
 }
