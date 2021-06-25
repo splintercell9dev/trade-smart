@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Directory, Encoding, Filesystem } from '@capacitor/filesystem';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { HomeApi } from '../models/home.interface';
 
 const IMG_FOLDER = 'CACHE_IMG' ;
 const API_FOLDER = 'CACHE_API' ;
@@ -35,7 +36,7 @@ export class StorageService {
       }) ;
     }
     catch(err){
-      console.log(err.stack);
+      console.error(err);
     }
   }
 
@@ -62,6 +63,40 @@ export class StorageService {
         data: JSON.stringify(APP_CONFIG),
         directory: Directory.Data
       }) ;
+    }
+  }
+
+  async loadHomeData(){
+    try{
+      const result = await Filesystem.readFile({
+        directory: Directory.Cache,
+        path: `/${API_FOLDER}/home-api.json`,
+        encoding: Encoding.UTF8
+      }) ;
+      console.log('home data loaded successfully');
+      return JSON.parse(result.data) as HomeApi ;
+    }
+    catch(err){
+      console.error(err);
+      console.log('failed to load home data');
+      return null ;
+    }
+  }
+
+  async saveHomeData(data: HomeApi){
+    try{
+      await Filesystem.writeFile({
+        directory: Directory.Cache,
+        data: JSON.stringify(data),
+        encoding: Encoding.UTF8,
+        path: `/${API_FOLDER}/home-api.json`
+      }) ;
+
+      console.log('home api data saved');
+    }
+    catch(err){
+      console.error(err);
+      console.log('home api data failed to save');
     }
   }
 }

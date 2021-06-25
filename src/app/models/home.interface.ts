@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-
-export interface Dimension{
-    width: number ;
-    height: number ;
+export interface HomeApi{
+    lastUpdated: Date ;
+    graph: GraphData[] ;
+    index: StockIndex[] ;
 }
 
 export interface GraphResult {

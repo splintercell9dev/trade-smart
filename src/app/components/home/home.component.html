@@ -1,3 +1,7 @@
+<ion-refresher slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200" (ionRefresh)="onRefresh($event)">
+  <ion-refresher-content></ion-refresher-content>
+</ion-refresher>
+
 <div class="home-container" *ngIf="indexData && graphData">
 
   <div class="data-last-updated">Last Updated: {{ lastUpdated | date: 'MMM dd, HH:mm' }}</div>

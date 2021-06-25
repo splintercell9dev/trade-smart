@@ -9,8 +9,4 @@ export class Tab1Page {
 
   constructor() {}
 
-  refreshStockIndices(event){
-    setTimeout(() => event.target.complete(), 5000) ;
-  }
-
 }

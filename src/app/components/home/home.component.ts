@@ -1,7 +1,9 @@
+import { HttpEventType } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
 import { GraphData, StockIndex } from 'src/app/models/home.interface';
 import { ApiService } from 'src/app/services/api.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-home',
@@ -24,20 +26,34 @@ export class HomeComponent implements OnInit {
   isNegative = false ;
   currentIndex = 0 ;
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private storage: StorageService) { }
 
-  ngOnInit() {
-    this.api.getHomeData().subscribe(
-      (result) => {
-        this.lastUpdated = result[0].metrics.lastUpdated ;
-        this.indexData = result[0].metrics.data ;
-        this.graphData = result[1].metrics.data ;
-      },
-      (err) => {
-        this.failed = true ;
-        console.log(err);
-      }
-    ) ;
+  async ngOnInit() {
+    const data = await this.storage.loadHomeData() ;
+    if (data){
+      this.lastUpdated = data.lastUpdated ;
+      this.graphData = data.graph ;
+      this.indexData = data.index ;
+    }
+    else{
+      this.api.getHomeData().subscribe(
+        async (result) => {
+          this.lastUpdated = result[0].metrics.lastUpdated ;
+          this.indexData = result[0].metrics.data ;
+          this.graphData = result[1].metrics.data ;
+
+          await this.storage.saveHomeData({
+            lastUpdated: result[0].metrics.lastUpdated,
+            index: result[0].metrics.data,
+            graph: result[1].metrics.data
+          }) ;
+        },
+        (err) => {
+          this.failed = true ;
+          console.error(err);
+        }
+      ) ;
+    }
   }
 
   async onSlideChange(){
@@ -45,6 +61,28 @@ export class HomeComponent implements OnInit {
     this.currentIndex = value ;
     this.currentIndexName = this.indexData[value].name ;
     this.isNegative = this.indexData[value].negative ;
-    console.log(this.currentIndex, this.currentIndexName);
+  }
+
+  onRefresh(event: any){
+    this.api.getHomeData().subscribe(
+      async (result) => {
+        this.lastUpdated = result[0].metrics.lastUpdated ;
+        this.indexData = result[0].metrics.data ;
+        this.graphData = result[1].metrics.data ;
+
+        await this.storage.saveHomeData({
+          lastUpdated: result[0].metrics.lastUpdated,
+          index: result[0].metrics.data,
+          graph: result[1].metrics.data
+        }) ;
+
+        event.target.complete() ;
+      },
+      (err) => {
+        this.failed = true ;
+        console.error(err);
+        event.target.complete() ;
+      }
+    ) ;
   }
 }
