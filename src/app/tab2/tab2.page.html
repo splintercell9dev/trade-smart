@@ -1,11 +1,23 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+  <ion-toolbar class="toolbar-title ion-padding-top">
+    <ion-title class="ion-padding-bottom">Social Feed</ion-title>
+
+    <ion-segment [value]="currentSegment" [color]="segementColor" (ionChange)="onSegmentChange($event)" mode="md">
+      <ion-segment-button value="twitter" layout="icon-start">
+        <ion-icon name="logo-twitter"></ion-icon>
+      </ion-segment-button>
+    
+      <ion-segment-button value="reddit" layout="icon-start">
+        <ion-icon name="logo-reddit"></ion-icon>
+      </ion-segment-button>
+    
+      <ion-segment-button value="news" layout="icon-start">
+        <ion-icon name="newspaper-outline"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content class="ion-padding">
+  <app-feed [tab]="currentSegment"></app-feed>
 </ion-content>

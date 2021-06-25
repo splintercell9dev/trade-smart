@@ -1,4 +1,3 @@
-import { HttpEventType } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
 import { GraphData, StockIndex } from 'src/app/models/home.interface';

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Directory, Encoding, Filesystem } from '@capacitor/filesystem';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { HomeApi } from '../models/home.interface';
+import { FeedAPI } from '../models/new.interface';
 
 const IMG_FOLDER = 'CACHE_IMG' ;
 const API_FOLDER = 'CACHE_API' ;
@@ -97,6 +98,41 @@ export class StorageService {
     catch(err){
       console.error(err);
       console.log('home api data failed to save');
+    }
+  }
+
+  async loadFeed(){
+    try{
+      const result = await Filesystem.readFile({
+        directory: Directory.Cache,
+        path: `/${API_FOLDER}/feed-api.json`,
+        encoding: Encoding.UTF8
+      }) ;
+
+      console.log('loaded feed successfully');
+      return JSON.parse(result.data) as FeedAPI ;
+    }
+    catch(err){
+      console.error(err);
+      console.log('failed to load feed');
+      return null ;
+    }
+  }
+
+  async saveFeed(data: FeedAPI){
+    try{
+      await Filesystem.writeFile({
+        directory: Directory.Cache,
+        data: JSON.stringify(data),
+        encoding: Encoding.UTF8,
+        path: `/${API_FOLDER}/feed-api.json`
+      }) ;
+
+      console.log('feed api data saved');
+    }
+    catch(err){
+      console.error(err);
+      console.log('feed api data failed to save');
     }
   }
 }
