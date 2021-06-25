@@ -1,0 +1,57 @@
+div.home-container{
+    height: 100%;
+
+    ion-slide{
+        padding: 10px 0 ;
+        border-radius: 12px;
+        box-shadow: rgb(0 0 0 / 12%) 0px 10px 15px ;
+        background-color: var(--ion-card-background);
+    
+        .index-name{
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .index-price{
+            font-size: 25px;
+            font-weight: 600;
+        }
+    
+        .sub-prices{
+            font-size: 18px;
+            font-weight: 500 ;
+        }
+    
+        .index-other-values{
+            padding-top: 0.5rem ;
+            font-size: 14px;
+    
+            .data-heading{
+                font-weight: 500 ;
+            }
+        }
+    }
+
+    .currency-price{
+        font-size: 22px;
+        font-weight: 600;
+    }
+    
+    .positive{
+        color: var(--ion-color-success) ;
+    }
+    
+    .negative{
+        color: var(--ion-color-danger) ;
+    }
+}
+
+div.graph-container{
+    margin-bottom: 10px;
+    height: calc(100% - 246px - 10px - 22px) ;
+}
+
+div.data-last-updated{
+    font-size: 9pt;
+    color: var(--ion-color-secondary) ;
+}

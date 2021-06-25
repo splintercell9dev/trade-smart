@@ -1,0 +1,11 @@
+<div class="chart-container" #canvasContainer>
+  <canvas
+    #stockIndexCanvas
+    baseChart
+    [options]="chartObject.chartOptions"
+    [colors]="chartObject.chartColor"
+    [datasets]="chartObject.chartData"
+    [chartType]="chartObject.chartType"
+    [labels]="chartObject.chartLabels"
+  ></canvas>
+</div>

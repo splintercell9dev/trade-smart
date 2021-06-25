@@ -1,0 +1,45 @@
+<div class="home-container" *ngIf="indexData && graphData">
+
+  <div class="data-last-updated">Last Updated: {{ lastUpdated | date: 'MMM dd, HH:mm' }}</div>
+
+  <div class="graph-container">
+    <app-stock-chart [data]="graphData" [isNegative]="isNegative" [indexName]="currentIndexName"></app-stock-chart>
+  </div>
+  
+  <ion-slides [options]="indexSliderOptions" (ionSlideDidChange)="onSlideChange()" #indicesSlider>
+    <ion-slide *ngFor="let index of indexData">
+      <ion-grid>
+        <ion-row class="index-name">
+          <ion-col>{{ index.name }}</ion-col>
+        </ion-row>
+
+        <div [ngClass]="{ 'negative': index.negative , 'positive' : !index.negative }">
+          <ion-row class="index-price">
+            <ion-col>{{ index.current | currency: 'INR': 'symbol' }}</ion-col>
+          </ion-row>
+
+          <ion-row class="sub-prices">
+            <ion-col>{{ index.difference }} ({{ index.percentage }}%)</ion-col>
+          </ion-row>
+        </div>
+
+        <ion-grid class="index-other-values ion-text-left">
+          <ion-row>
+            <ion-col class="data-heading">Open</ion-col>
+            <ion-col>{{ index.open | currency: 'INR': 'symbol'  }}</ion-col>  
+          </ion-row>
+
+          <ion-row>
+            <ion-col class="data-heading">High</ion-col>
+            <ion-col>{{ index.high | currency: 'INR': 'symbol'  }}</ion-col>  
+          </ion-row>
+
+          <ion-row>
+            <ion-col class="data-heading">Low</ion-col>
+            <ion-col>{{ index.low | currency: 'INR': 'symbol'  }}</ion-col>  
+          </ion-row>
+        </ion-grid>
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
+</div>
