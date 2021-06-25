@@ -27,8 +27,6 @@ export class FeedComponent implements OnInit {
       this.wallstreetbets = data.reddit.wallstreetbets ;
       this.investing = data.reddit.investing ;
       this.news = data.news ;
-
-      console.log(data);
     }
     else{
       this.api.getFeedData().subscribe(

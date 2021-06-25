@@ -2,4 +2,16 @@
   <ion-refresher-content></ion-refresher-content>
 </ion-refresher>
 
-{{ tab }}
+<div class="feed-container" *ngIf="twitter && news && wallstreetbets && investing">
+  <div *ngIf="tab === 'twitter'" class="section-cards">
+    <app-tweet [twitter]="twitter"></app-tweet>
+  </div>
+  
+  <div *ngIf="tab === 'reddit'" class="section-cards">
+    <app-reddit-post [wallstreetbets]="wallstreetbets" [investing]="investing"></app-reddit-post>
+  </div>
+
+  <div *ngIf="tab === 'news'" class="section-cards">
+    <app-news-card [news]="news"></app-news-card>
+  </div>
+</div>
