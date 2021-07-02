@@ -1,3 +1,23 @@
-<p>
-  news-card works!
-</p>
+<ion-card *ngFor="let n of news">
+  <img [src]="n.urlToImage" />
+
+  <ion-card-header>
+    <ion-card-title>{{ n.title }}</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    {{ n.description }}
+  </ion-card-content>
+
+  <div class="card-footer ion-padding-bottom ion-padding-start ion-padding-end">
+    <div class="news-source">
+      {{ n.source.name }}
+    </div>
+    <div class="news-sentiment" [ngClass]="{ 'positive': n.sentiment === 'positive', 'negative': n.sentiment === 'negative', 'neutral': n.sentiment === 'neutral' }">
+      ({{ n.sentiment }})
+    </div>
+
+    <ion-icon name="open-outline" color="secondary" (click)="openLink(n.url)"></ion-icon>
+    <ion-icon name="share-social" color="tertiary" (click)="shareLink(n)"></ion-icon>
+  </div>
+</ion-card>

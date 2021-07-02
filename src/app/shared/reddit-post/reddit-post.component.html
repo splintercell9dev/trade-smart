@@ -1,3 +1,87 @@
-<p>
-  reddit-post works!
-</p>
+<h2>r/Wallstreetbets</h2>
+
+<div class="post-container" *ngFor="let post of wallstreetbets">
+
+  <div class="post-header">
+    <div class="user">
+      <span class="author">u/{{ post.author }}</span>
+      <span>· {{ post.created_utc | redditTime }}</span>
+    </div>
+
+    <div class="awards-container">
+      <div class="award" *ngFor="let award of post.all_awardings.slice(0,4)">
+        <img [src]="award.resized_icons[2].url">
+      </div>
+      <span class="total_awards">{{ post.total_awards_received }} awards</span>
+    </div>
+  </div>
+
+  <div class="post-body">
+    <h6>{{ post.title }}</h6>
+    <span class="flair" [ngStyle]="{ backgroundColor: post.link_flair_background_color }">{{ post.link_flair_text }}</span>
+    <p *ngIf="post.selftext !== ''">{{ post.selftext }}</p>
+  </div>
+
+  <div class="post-footer">
+    <div class="footer-div">
+      <ion-icon name="arrow-up"></ion-icon>
+      <span class="upvotes">{{ post.ups | redditCount }}</span>
+      <ion-icon name="arrow-down"></ion-icon>
+    </div>
+
+    <div class="footer-div">
+      <ion-icon name="chatbox-outline"></ion-icon>
+      <span>{{ post.num_comments | redditCount }}</span>
+    </div>
+
+    <div class="footer-div" (click)="shareRedditPost(post)">
+      <ion-icon name="share-social-outline"></ion-icon>
+      <span>Share</span>
+    </div>
+  </div>
+
+</div>
+
+<h2>r/Investing</h2>
+
+<div class="post-container" *ngFor="let post of investing">
+
+  <div class="post-header">
+    <div class="user">
+      <span class="author">u/{{ post.author }}</span>
+      <span>· {{ post.created_utc | redditTime }}</span>
+    </div>
+
+    <div class="awards-container" *ngIf="post.total_awards_received">
+      <div class="award" *ngFor="let award of post.all_awardings.slice(0,4)">
+        <img [src]="award.resized_icons[2].url">
+      </div>
+      <span class="total_awards">{{ post.total_awards_received }} awards</span>
+    </div>
+  </div>
+
+  <div class="post-body">
+    <h6>{{ post.title }}</h6>
+    <span *ngIf="post.link_flair_text" class="flair" [ngStyle]="{ backgroundColor: post.link_flair_background_color }">{{ post.link_flair_text }}</span>
+    <p *ngIf="post.selftext !== ''">{{ post.selftext }}</p>
+  </div>
+
+  <div class="post-footer">
+    <div class="footer-div">
+      <ion-icon name="arrow-up"></ion-icon>
+      <span class="upvotes">{{ post.ups | redditCount }}</span>
+      <ion-icon name="arrow-down"></ion-icon>
+    </div>
+
+    <div class="footer-div">
+      <ion-icon name="chatbox-outline"></ion-icon>
+      <span>{{ post.num_comments | redditCount }}</span>
+    </div>
+
+    <div class="footer-div" (click)="shareRedditPost(post)">
+      <ion-icon name="share-social-outline"></ion-icon>
+      <span>Share</span>
+    </div>
+  </div>
+
+</div>

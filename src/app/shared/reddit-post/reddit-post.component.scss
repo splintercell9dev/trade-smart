@@ -1,0 +1,103 @@
+h2{
+    margin-top: unset !important ;
+}
+
+div.post-container{
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+
+    div.post-header{
+        display: flex;
+        flex-direction: column;
+        color: var(--ion-color-medium) ;
+
+        div.user{
+            span.author{
+                margin-right: 5px;
+            }
+
+            span{
+                font-size: 10pt;
+            }
+        }
+
+
+        div.awards-container{
+            display: flex;
+            align-items: center;
+            
+            div.award{
+                display: flex;
+                align-items: center;
+
+                img{
+                    margin-right: 5px;
+                    width: 18px;
+                }
+
+            }
+
+            span{
+                display: block;
+                font-size: 10pt;
+            }
+        }
+    }
+
+    div.post-body{
+        margin-top: 10px;
+
+        h6{
+            margin: unset !important;
+            font-size: 13pt;
+        }
+
+        span.flair{
+            display: inline-block;
+            margin-top: 5px;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 9pt;
+            text-align: center;
+        }
+
+        p{
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
+            margin: 5px 0 ;
+            white-space: normal ;
+            text-overflow: ellipsis;
+            color: var(--ion-color-medium) ;
+            font-size: 10pt;
+        }
+    }
+
+    div.post-footer{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+        color: var(--ion-color-medium) ;
+
+        div.footer-div{
+            display: flex;
+            align-items: center;
+
+            ion-icon{
+                font-size: 24px;
+                margin-right: 5px;
+            }
+
+            span.upvotes{
+                margin-right: 5px;
+            }
+        }
+    }
+
+    & + h2{
+        margin-top: 10px !important;
+    }
+}

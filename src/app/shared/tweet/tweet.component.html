@@ -1,3 +1,54 @@
-<p>
-  tweet works!
-</p>
+<div class="twitter-container" *ngFor="let twit of twitter">
+  <h5>Tweets by <span>@{{ twit.username }}</span></h5>
+
+  <div class="tweet-container" *ngFor="let tweet of twit.tweets.data">
+
+    <div class="tweet-header">
+      <img [src]="twit.profile_image_url">
+
+      <div class="tweet-user-container">
+
+        <div class="user">
+          <span>{{ twit.name }}</span>
+          <ion-icon *ngIf="twit.verified" src="assets/icon/verified.svg"></ion-icon>
+          <span>· {{ tweet.created_at | tweetTime }}</span>
+        </div>
+
+        <div class="user-handle">
+          <span>@{{ twit.username }}</span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="tweet-body">
+      <p class="ion-no-padding" [innerHTML]="tweet.text | tweetHtml"></p>
+      <div *ngIf="tweet.attachments">
+        <img [src]="getImageSrc(twit.tweets.includes.media, tweet.attachments.media_keys[0])">
+      </div>
+    </div>
+
+    <div class="tweet-footer">
+      <div class="metric">
+        <ion-icon class="reply-icon" src="assets/icon/reply.svg" color="primary"></ion-icon>
+        <div class="count">{{ tweet.public_metrics.reply_count | tweetMetrics }}</div>
+      </div>
+
+      <div class="metric">
+        <ion-icon class="retweet-icon" src="assets/icon/retweet.svg" color="success"></ion-icon>
+        <div class="count">{{ tweet.public_metrics.retweet_count | tweetMetrics }}</div>
+      </div>
+
+      <div class="metric">
+        <ion-icon name="heart-outline" color="danger"></ion-icon>
+        <div class="count">{{ tweet.public_metrics.like_count | tweetMetrics }}</div>
+      </div>
+
+      <div class="metric">
+        <ion-icon name="share-social" color="medium" (click)="shareTweet(twit.username, tweet)"></ion-icon>
+        <div class="count">Share</div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,48 @@
+div.card-footer{
+    display: flex;
+    align-items: center;
+
+    img{
+        border-radius: 50%;
+        margin-right: 5px;
+    }
+
+    div.news-source{
+        font-size: 11pt;
+        font-weight: 600;
+        margin-right: 5px;
+        overflow-x: hidden;
+        flex-wrap: wrap;
+    }
+
+    div.news-sentiment{
+        font-size: 10pt;
+        font-weight: 700;
+        text-transform: capitalize;
+        flex-grow: 1;
+    }
+
+    ion-icon{
+        font-size: 24px;
+        
+        & + ion-icon{
+            margin-left: 10px;
+        }
+    }
+}
+
+ion-card{
+    margin-bottom: 1.5rem;
+}
+
+.neutral{
+    color: var(--ion-color-medium) ;
+}
+
+.positive{
+    color: var(--ion-color-success) ;
+}
+
+.negative{
+    color: var(--ion-color-danger)
+}
