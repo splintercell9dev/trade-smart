@@ -1,10 +1,19 @@
 div.twitter-container{
     margin-bottom: 2.5rem;
 
+    ion-item-divider{
+        h5{
+            span{
+                color: var(--ion-color-primary) ;
+            }
+        }
+    }
+
     div.tweet-container{
         display: flex;
         flex-direction: column;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
+
 
         div.tweet-header{
             display: flex;
@@ -12,8 +21,8 @@ div.twitter-container{
             
             img{
                 border-radius: 50%;
-                width: 40px;
-                margin-right: 5px;
+                width: 50px;
+                margin-right: 8px;
             }
 
             div.tweet-user-container{

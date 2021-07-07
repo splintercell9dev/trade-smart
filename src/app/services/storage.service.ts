@@ -2,25 +2,23 @@ import { Injectable } from '@angular/core';
 import { Directory, Encoding, Filesystem } from '@capacitor/filesystem';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { HomeApi } from '../models/home.interface';
-import { FeedAPI } from '../models/new.interface';
+import { FeedAPI } from '../models/news.interface';
+import { List } from '../models/search.interface';
+import { ToastService } from './toast.service';
 
 const IMG_FOLDER = 'CACHE_IMG' ;
 const API_FOLDER = 'CACHE_API' ;
-
-const APP_CONFIG = {
-  bookmarks: []
-} ;
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
-  bookmarkCopy: Observable<any>;
+  bookmarkCopy: Observable<List[]>;
 
-  private bookmarks = APP_CONFIG ;
-  private bookmarkObservable = new BehaviorSubject(APP_CONFIG) ;
+  private bookmarks: List[] = [];
+  private bookmarkObservable = new BehaviorSubject(this.bookmarks) ;
 
-  constructor() {
+  constructor(private toast: ToastService) {
     this.bookmarkCopy = this.bookmarkObservable.asObservable() ;
   }
 
@@ -41,11 +39,11 @@ export class StorageService {
     }
   }
 
-  async initAppConfigFile(){
+  async initBookmarksFile(){
     try{
       const result = await Filesystem.readFile({
         directory: Directory.Data,
-        path: 'app-config.json',
+        path: 'app-bookmarks.json',
         encoding: Encoding.UTF8
       }) ;
 
@@ -53,16 +51,17 @@ export class StorageService {
         throw new Error('App config file not found') ;
       }
       else{
-        this.bookmarks = JSON.parse(result.data) ;
+        console.log(JSON.parse(result.data));
+        this.bookmarks = JSON.parse(result.data) as List[] ;
         this.bookmarkObservable.next(JSON.parse(result.data)) ;
       }
     }
     catch(err){
       console.log(err.stack);
       await Filesystem.writeFile({
-        path: 'app-config.json',
-        data: JSON.stringify(APP_CONFIG),
-        directory: Directory.Data
+        directory: Directory.Data,
+        path: 'app-bookmarks.json',
+        data: JSON.stringify(this.bookmarks)
       }) ;
     }
   }
@@ -134,5 +133,47 @@ export class StorageService {
       console.error(err);
       console.log('feed api data failed to save');
     }
+  }
+
+  async addBookmark(company: List){
+    try{
+      this.bookmarks.push(company) ;
+      this.bookmarkObservable.next(this.bookmarks) ;
+
+      await Filesystem.writeFile({
+        directory: Directory.Data,
+        path: 'app-bookmarks.json',
+        encoding: Encoding.UTF8,
+        data: JSON.stringify(this.bookmarks)
+      }) ;
+
+      await this.toast.showNormalToast('Added new bookmark ', 1500) ;
+    }
+    catch(err){
+      console.error(err) ;
+    }
+  }
+
+  async removeBookmark(company: List){
+    try{
+      this.bookmarks = this.bookmarks.filter( c => c.symbol !== company.symbol ) ;
+      this.bookmarkObservable.next(this.bookmarks) ;
+
+      await Filesystem.writeFile({
+        directory: Directory.Data,
+        path: 'app-bookmarks.json',
+        encoding: Encoding.UTF8,
+        data: JSON.stringify(this.bookmarks)
+      }) ;
+
+      await this.toast.showNormalToast('Removed Bookmark', 1500) ;
+    }
+    catch(err){
+      console.error(err);
+    }
+  }
+
+  getBookmarks(){
+    return this.bookmarks ;
   }
 }

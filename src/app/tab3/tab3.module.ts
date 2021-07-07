@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { Tab3Page } from './tab3.page';
 
 import { Tab3PageRoutingModule } from './tab3-routing.module';
+import { SearchModule } from '../components/search/search.module';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 @NgModule({
   imports: [
@@ -12,6 +14,8 @@ import { Tab3PageRoutingModule } from './tab3-routing.module';
     CommonModule,
     FormsModule,
     Tab3PageRoutingModule,
+    SearchModule,
+    LazyLoadImageModule
   ],
   declarations: [Tab3Page]
 })

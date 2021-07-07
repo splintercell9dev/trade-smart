@@ -1,12 +1,50 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
-  </ion-toolbar>
+<ion-header>
+  <ion-searchbar class="search-bar" mode="ios" [(ngModel)]="searchText" debounce="1000" (ionInput)="onTyping($event.target)" (ionChange)="getSearchResults()"></ion-searchbar>
 </ion-header>
 
 <ion-content>
 
+  <div *ngIf="loadingState" class="spinner">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+
+  <div *ngIf="!loadingState" class="content-container">
+    <ion-list class="list" *ngIf="results.length; else showEmpty">
+      <ion-item *ngFor="let company of results; trackBy: trackByFn">
+        <ion-avatar slot="start">
+          <img defaultImage="assets/icon/loader.gif" [lazyLoad]="company.profileImageUrl">
+        </ion-avatar>
+
+        <ion-label>
+          <h3 class="company-name">{{ company.name }}</h3>
+          <h5 class="company-code">{{ company.symbol }}</h5>
+          <h2 class="company-stock-price">{{ company.price | currency: 'INR' }}</h2>
+          <h4 class="company-other" [ngClass]="{ success: !company.negative, danger: company.negative }">{{ company.difference }} ({{ company.percentage }}%)</h4>
+        </ion-label>
+
+        <ion-icon *ngIf="company.bookmarked" src="assets/icon/pin-filled.svg" (click)="removeBookmark(company)" color="primary" slot="end"></ion-icon>
+
+        <ion-icon *ngIf="!company.bookmarked" src="assets/icon/pin-outline.svg" (click)="addBookmark(company)" color="primary" slot="end"></ion-icon>
+      </ion-item>
+    </ion-list>
+
+    <ng-template #showEmpty>
+      <div class="empty-container" *ngIf="searchText === ''; else nothingFound">
+        <ion-icon name="search" color="primary"></ion-icon>
+        <div class="container-message">
+          Type something in searchbar
+        </div>
+      </div>
+
+      <ng-template #nothingFound>
+        <div class="empty-container">
+          <ion-icon name="alert-circle" color="primary"></ion-icon>
+          <div class="empty-container">
+            No result found!
+          </div>
+        </div>
+      </ng-template>
+    </ng-template>
+  </div>
 
 </ion-content>

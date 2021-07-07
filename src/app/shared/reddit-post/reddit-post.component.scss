@@ -1,5 +1,8 @@
-h2{
-    margin-top: unset !important ;
+ion-item-divider{
+    h2{
+        margin-top: unset !important ;
+        color: var(--ion-color-danger);
+    }
 }
 
 div.post-container{

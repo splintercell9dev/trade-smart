@@ -1,5 +1,8 @@
 <div class="twitter-container" *ngFor="let twit of twitter">
-  <h5>Tweets by <span>@{{ twit.username }}</span></h5>
+  
+  <ion-item-divider class="ion-no-padding ion-margin-bottom">
+    <h5>Tweets by <span>@{{ twit.username }}</span></h5>
+  </ion-item-divider>
 
   <div class="tweet-container" *ngFor="let tweet of twit.tweets.data">
 
@@ -23,7 +26,7 @@
 
     <div class="tweet-body">
       <p class="ion-no-padding" [innerHTML]="tweet.text | tweetHtml"></p>
-      <div *ngIf="tweet.attachments">
+      <div *ngIf="tweet.hasOwnProperty('attachments')">
         <img [src]="getImageSrc(twit.tweets.includes.media, tweet.attachments.media_keys[0])">
       </div>
     </div>

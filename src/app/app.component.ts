@@ -8,7 +8,7 @@ import { StorageService } from './services/storage.service';
 })
 export class AppComponent {
   constructor(private storage: StorageService) {
-    this.storage.initAppConfigFile() ;
+    this.storage.initBookmarksFile() ;
     this.storage.initCacheFolders() ;
   }
 }

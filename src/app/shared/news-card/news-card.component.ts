@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Share } from '@capacitor/share';
-import { News } from 'src/app/models/new.interface';
+import { News } from 'src/app/models/news.interface';
 
 @Component({
   selector: 'app-news-card',

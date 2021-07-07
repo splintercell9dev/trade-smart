@@ -3,9 +3,10 @@ import { Injectable } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { apiBaseUrl } from '../../environments/environment' ;
 import { GraphResult, StockIndicesResult } from '../models/home.interface';
-import { NewsAPI } from '../models/new.interface';
+import { NewsAPI } from '../models/news.interface';
 import { RedditInvestingAPI } from '../models/reddit.investing.interface';
 import { RedditWallStreetAPI } from '../models/reddit.wallstreet.interface';
+import { SearchRequest } from '../models/search.interface';
 import { TwitterAPI } from '../models/twitter.interface';
 
 @Injectable({
@@ -29,5 +30,13 @@ export class ApiService {
       this.http.get<RedditInvestingAPI>(`${apiBaseUrl}/reddit/investing`),
       this.http.get<NewsAPI>(`${apiBaseUrl}/news/all`)
     ]) ;
+  }
+
+  getSearchData(s: string){
+    return this.http.get<SearchRequest>(`${apiBaseUrl}/company/search`, {
+      params: {
+        q: s
+      }
+    }) ;
   }
 }

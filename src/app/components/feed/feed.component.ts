@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { News } from 'src/app/models/new.interface';
+import { News } from 'src/app/models/news.interface';
 import { Investing } from 'src/app/models/reddit.investing.interface';
 import { WallStreetBets } from 'src/app/models/reddit.wallstreet.interface';
-import { Data, Twitter } from 'src/app/models/twitter.interface';
+import { Twitter } from 'src/app/models/twitter.interface';
 import { ApiService } from 'src/app/services/api.service';
 import { StorageService } from 'src/app/services/storage.service';
 
