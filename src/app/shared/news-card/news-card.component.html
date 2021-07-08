@@ -1,5 +1,5 @@
 <ion-card *ngFor="let n of news">
-  <img [src]="n.urlToImage" />
+  <img [lazyLoad]="n.urlToImage"/>
 
   <ion-card-header>
     <ion-card-title>{{ n.title }}</ion-card-title>

@@ -17,8 +17,10 @@
     </ion-tab-button>
 
     <ion-tab-button tab="tab4">
-      <ion-icon [name]="tabRoute === 'tab4' ? 'bookmark' : 'bookmark-outline'"></ion-icon>
+      <ion-icon [name]="tabRoute === 'tab4' ? 'bookmark' : 'bookmark-outline'">
+      </ion-icon>
       <ion-label>Bookmarks</ion-label>
+      <ion-badge *ngIf="newBookmarks && !firstTime && tabRoute !== 'tab4'" color="danger">{{ newBookmarks }}</ion-badge>
     </ion-tab-button>
   </ion-tab-bar>
 

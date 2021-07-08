@@ -30,7 +30,7 @@
 
     <ng-template #showEmpty>
       <div class="empty-container" *ngIf="searchText === ''; else nothingFound">
-        <ion-icon name="search" color="primary"></ion-icon>
+        <img src="assets/images/search.svg" />
         <div class="container-message">
           Type something in searchbar
         </div>
@@ -38,7 +38,7 @@
 
       <ng-template #nothingFound>
         <div class="empty-container">
-          <ion-icon name="alert-circle" color="primary"></ion-icon>
+          <img src="assets/images/not-found.svg" />
           <div class="empty-container">
             No result found!
           </div>

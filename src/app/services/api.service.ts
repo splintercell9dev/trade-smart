@@ -39,4 +39,12 @@ export class ApiService {
       }
     }) ;
   }
+
+  getBookmarkData(list: string[]){
+    return this.http.get<SearchRequest>(`${apiBaseUrl}/bookmarks`, {
+      params: {
+        array: JSON.stringify(list)
+      }
+    }) ;
+  }
 }

@@ -1,1 +1,18 @@
+ion-tabs{
+    ion-tab-bar{
+        ion-tab-button{
+            &:nth-child(4){
+                position: relative;
 
+                ion-badge{
+                    position: absolute;
+                    top: 5px ;
+                    left: 50% ;
+                    border-radius: 100%;
+                    font-size: 6.5pt;
+                    padding: 4px 5px;
+                }
+            }
+        }
+    }
+}

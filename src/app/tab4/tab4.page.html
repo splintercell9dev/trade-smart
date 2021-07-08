@@ -1,9 +1,41 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Tab4</ion-title>
+    <ion-title>Bookmarks</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-refresher slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200" (ionRefresh)="onRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div *ngIf="!bookmarks.length; else bookmarkList" class="empty-container">
+    <img src="assets/images/empty.svg" />
+    <p class="empty-message">
+      No bookmarks saved currently. Please pin the stocks to see them here!
+    </p>
+  </div>
+
+  <ng-template #bookmarkList>
+    <div class="list-container">
+      <ion-list>
+        <ion-item *ngFor="let company of bookmarks; trackBy: trackByFn">
+          <ion-avatar slot="start">
+            <img defaultImage="assets/icon/loader.gif" [lazyLoad]="company.profileImageUrl">
+          </ion-avatar>
+  
+          <ion-label>
+            <h3 class="company-name">{{ company.name }}</h3>
+            <h5 class="company-code">{{ company.symbol }}</h5>
+            <h2 class="company-stock-price">{{ company.price | currency: 'INR' }}</h2>
+            <h4 class="company-other" [ngClass]="{ success: !company.negative, danger: company.negative }">{{ company.difference }} ({{ company.percentage }}%)</h4>
+          </ion-label>
+
+          <ion-icon name="close-circle" (click)="removeBookmarks(company)" slot="end" color="danger"></ion-icon>
+        </ion-item>
+      </ion-list>
+    </div>
+  </ng-template>
 
 </ion-content>

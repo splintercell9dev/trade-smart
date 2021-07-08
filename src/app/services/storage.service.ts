@@ -16,7 +16,7 @@ export class StorageService {
   bookmarkCopy: Observable<List[]>;
 
   private bookmarks: List[] = [];
-  private bookmarkObservable = new BehaviorSubject(this.bookmarks) ;
+  private bookmarkObservable = new BehaviorSubject<List[]>(this.bookmarks) ;
 
   constructor(private toast: ToastService) {
     this.bookmarkCopy = this.bookmarkObservable.asObservable() ;
@@ -51,7 +51,7 @@ export class StorageService {
         throw new Error('App config file not found') ;
       }
       else{
-        console.log(JSON.parse(result.data));
+        // console.log(JSON.parse(result.data));
         this.bookmarks = JSON.parse(result.data) as List[] ;
         this.bookmarkObservable.next(JSON.parse(result.data)) ;
       }
@@ -147,7 +147,7 @@ export class StorageService {
         data: JSON.stringify(this.bookmarks)
       }) ;
 
-      await this.toast.showNormalToast('Added new bookmark ', 1500) ;
+      await this.toast.showNormalToast('Added new bookmark ', 1000) ;
     }
     catch(err){
       console.error(err) ;
@@ -156,8 +156,14 @@ export class StorageService {
 
   async removeBookmark(company: List){
     try{
-      this.bookmarks = this.bookmarks.filter( c => c.symbol !== company.symbol ) ;
-      this.bookmarkObservable.next(this.bookmarks) ;
+      if (this.bookmarks.length === 1){
+        this.bookmarks = [] ;
+        this.bookmarkObservable.next(this.bookmarks) ;
+      }
+      else{
+        this.bookmarks = this.bookmarks.filter( c => c.symbol !== company.symbol ) ;
+        this.bookmarkObservable.next(this.bookmarks) ;
+      }
 
       await Filesystem.writeFile({
         directory: Directory.Data,
@@ -166,14 +172,31 @@ export class StorageService {
         data: JSON.stringify(this.bookmarks)
       }) ;
 
-      await this.toast.showNormalToast('Removed Bookmark', 1500) ;
+      await this.toast.showNormalToast('Removed Bookmark', 1000) ;
     }
     catch(err){
       console.error(err);
     }
   }
 
+  async updateBookmarks(list: List[]){
+    try{
+      await Filesystem.writeFile({
+        directory: Directory.Data,
+        path: 'app-bookmarks.json',
+        encoding: Encoding.UTF8,
+        data: JSON.stringify(list)
+      }) ;
+
+      console.log('bookmarks saved');
+    }
+    catch(err){
+      console.error(err);
+      console.log('failed to save bookmarks');
+    }
+  }
+
   getBookmarks(){
-    return this.bookmarks ;
+    return this.bookmarkObservable.value ;
   }
 }

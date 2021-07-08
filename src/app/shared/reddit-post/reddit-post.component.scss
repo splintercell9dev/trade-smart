@@ -54,6 +54,11 @@ div.post-container{
         h6{
             margin: unset !important;
             font-size: 13pt;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         span.flair{

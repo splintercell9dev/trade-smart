@@ -12,7 +12,8 @@ export class ToastService {
   async showNormalToast(msg: string, time: number){
     const toast = await this.toastCtrl.create({
       duration: time,
-      message: msg
+      message: msg,
+      cssClass: 'toastClass'
     }) ;
 
     await toast.present() ;

@@ -7,7 +7,7 @@
   <div class="tweet-container" *ngFor="let tweet of twit.tweets.data">
 
     <div class="tweet-header">
-      <img [src]="twit.profile_image_url">
+      <img defaultImage="assets/icon/loader.gif" [lazyLoad]="twit.profile_image_url">
 
       <div class="tweet-user-container">
 
@@ -26,7 +26,7 @@
 
     <div class="tweet-body">
       <p class="ion-no-padding" [innerHTML]="tweet.text | tweetHtml"></p>
-      <div *ngIf="tweet.hasOwnProperty('attachments')">
+      <div *ngIf="tweet.attachments">
         <img [src]="getImageSrc(twit.tweets.includes.media, tweet.attachments.media_keys[0])">
       </div>
     </div>

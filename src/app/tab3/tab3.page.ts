@@ -1,5 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { textChangeRangeIsUnchanged } from 'typescript';
 import { Bookmark, List } from '../models/search.interface';
 import { ApiService } from '../services/api.service';
 import { StorageService } from '../services/storage.service';
@@ -21,21 +23,26 @@ export class Tab3Page implements OnInit, OnDestroy{
 
   sub: Subscription ;
 
-  constructor(private api: ApiService, private storage: StorageService) {
+  constructor(private api: ApiService, private storage: StorageService, private router: Router) {
     this.searchText = '' ;
     this.results = [] ;
   }
 
   ngOnInit(){
-    // this.sub = this.storage.bookmarkCopy.subscribe( b => {
-    //   this.bookmarks = b ;
-    // }) ;
+    this.sub = this.storage.bookmarkCopy.subscribe( val => {
+      this.bookmarks = val ;
+    }) ;
+
+    this.router.events.subscribe( ev => {
+      if (ev instanceof NavigationStart){
+        this.searchText = '' ;
+        this.results = [] ;
+      }
+    }) ;
   }
 
   ngOnDestroy(){
-    if (this.sub){
-      this.sub.unsubscribe() ;
-    }
+    this.sub.unsubscribe() ;
   }
 
   onTyping(event){
@@ -101,6 +108,6 @@ export class Tab3Page implements OnInit, OnDestroy{
   }
 
   trackByFn(index, item: Bookmark){
-    return item.name ;
+    return item.symbol ;
   }
 }
