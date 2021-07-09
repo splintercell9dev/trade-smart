@@ -8,6 +8,7 @@ import { Tab4PageRoutingModule } from './tab4-routing.module';
 
 import { Tab4Page } from './tab4.page';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { CompanyModalModule } from '../shared/company-modal/company-modal.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
     FormsModule,
     IonicModule,
     Tab4PageRoutingModule,
-    LazyLoadImageModule
+    LazyLoadImageModule,
+    CompanyModalModule
   ],
   declarations: [Tab4Page]
 })
