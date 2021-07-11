@@ -1,0 +1,68 @@
+<div class="summary-container ion-padding">
+
+  <!-- <h4 class="ion-no-margin">Current Stock Details</h4> -->
+
+  <div class="stock-price">{{ stock.price | currency: 'INR' }}</div>
+  <div class="stock-other" [ngClass]="{ profit: !stock.negative, loss: stock.negative}">
+    {{ stock.difference }} ({{ stock.percentage }}%)
+  </div>
+
+  <ion-item-divider class="ion-no-padding ion-margin-top">
+    <ion-title class="ion-no-padding">Summary</ion-title>
+  </ion-item-divider>
+
+  <ion-grid>
+    
+    <ion-row>
+      <ion-col>Previous Close</ion-col>
+      <ion-col>{{ summary.previousClose.fmt }}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>Open</ion-col>
+      <ion-col>{{ summary.open.fmt }}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>Day's Range</ion-col>
+      <ion-col>{{ summary.dayLow.fmt }} - {{ summary.dayHigh.fmt }}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>Volume</ion-col>
+      <ion-col>{{ summary.volume.fmt }}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>Average Volume</ion-col>
+      <ion-col>{{ summary.averageVolume.fmt }}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>Market Cap</ion-col>
+      <ion-col>{{ summary.marketCap.fmt }}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>Beta(5Y monthly)</ion-col>
+      <ion-col>{{ summary.beta.fmt }}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>PE Ratio (TTM)</ion-col>
+      <ion-col>{{ summary.trailingPE.fmt }}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>Fwd divided & yield</ion-col>
+      <ion-col>{{ summary.trailingAnnualDividendRate.fmt }} ({{ summary.trailingAnnualDividendYield.fmt }})</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>Ex-dividend date</ion-col>
+      <ion-col>{{ summary.exDividendDate.fmt }}</ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+</div>

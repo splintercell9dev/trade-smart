@@ -318,9 +318,9 @@ export class StorageService {
         }) ;
 
         return {
-          details: JSON.stringify(details.data) as unknown as Details,
-          chart: JSON.stringify(chart.data) as unknown as ChartFullDetails,
-          news: JSON.stringify(news.data) as unknown as News[],
+          details: JSON.parse(details.data) as unknown as Details,
+          chart: JSON.parse(chart.data) as unknown as ChartFullDetails,
+          news: JSON.parse(news.data) as unknown as News[],
           twitter: null
         } ;
       }

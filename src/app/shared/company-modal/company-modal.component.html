@@ -43,6 +43,10 @@
   </ion-header>
 
   <ion-content>
-    
+    <app-company-summary [stock]="company" [summary]="companyDetails.summaryDetail" *ngIf="activeSlide === 0"></app-company-summary>
+    <app-company-charts *ngIf="activeSlide === 1"></app-company-charts>
+    <app-company-finance *ngIf="activeSlide === 2"></app-company-finance>
+    <app-company-social *ngIf="activeSlide === 3"></app-company-social>
+    <app-company-profile *ngIf="activeSlide === 4"></app-company-profile>
   </ion-content>
 </div>

@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { ChartFullDetails, CompanyFullDetails, Details, LoadInterFace } from 'src/app/models/company.interface';
 import { News, NewsAPI } from 'src/app/models/news.interface';
+import { List } from 'src/app/models/search.interface';
 import { Twitter, TwitterAPI } from 'src/app/models/twitter.interface';
 import { ApiService } from 'src/app/services/api.service';
 import { StorageService } from 'src/app/services/storage.service';
@@ -14,6 +15,7 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class CompanyModalComponent implements OnInit {
   @Input() symbol: string;
+  @Input() company: List;
   @Input() twitr: null | Twitter ;
   error = false ;
   loading = true ;
@@ -23,18 +25,18 @@ export class CompanyModalComponent implements OnInit {
   news: News[] ;
   twitter: Twitter[] ;
 
-  chipHeaders = ['Summay', 'Profile', 'Charts', 'Finance', 'Social'] ;
-  iconList = ['newspaper', 'person', 'pie-chart', 'analytics', 'logo-facebook'] ;
+  chipHeaders = ['Summary', 'Charts', 'Finance', 'Social', 'Profile'] ;
+  iconList = ['newspaper', 'pie-chart', 'analytics', 'logo-facebook', 'person'] ;
   activeSlide = 0 ;
 
   sliderOptions = {
     freeMode: true,
-    slidesPerView: 3.2,
+    slidesPerView: 2.9,
     slidesOffsetBefore: 10,
     slidesOffsetAfter: 5
   } ;
 
-  constructor(private modalCtrl: ModalController, private api: ApiService, private storage: StorageService) {
+  constructor(private platform: Platform, private modalCtrl: ModalController, private api: ApiService, private storage: StorageService) {
     this.chartData = {
       '1d': {
         range: '1d',
@@ -62,6 +64,13 @@ export class CompanyModalComponent implements OnInit {
         timestamp: []
       }
     } ;
+
+    if (this.platform.width() < 360 ){
+      this.sliderOptions.slidesPerView = 2.8 ;
+    }
+    else if (this.platform.width() > 360 && this.platform.width() < 576){
+      this.sliderOptions.slidesPerView = 3.5 ;
+    }
   }
 
   async ngOnInit() {

@@ -1,0 +1,38 @@
+div.summary-container{
+    height: 100% ;
+
+    h4{
+        margin-bottom: 5px;
+    }
+
+    div.stock-price{
+        font-size: 24pt;
+        font-weight: 700;
+    }
+
+    div.stock-other{
+        font-size: 15pt;
+        font-weight: 500
+    }
+
+    ion-title{
+        color: #fff ;
+    }
+
+    ion-row{
+        color: var(--ion-color-medium) ;
+        ion-col{
+            &:nth-child(2){
+                font-weight: 700;
+            }
+        }
+    }
+}
+
+.profit{
+    color: var(--ion-color-success) ;
+}
+
+.loss{
+    color: var(--ion-color-danger) ;
+}
