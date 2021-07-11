@@ -60,14 +60,14 @@ export class Tab4Page implements OnInit, OnDestroy {
     }
   }
 
-  async presentModal(symbol: string){
-    const twitter = fullDetails.filter( company => company.symbol === symbol )[0] ;
+  async presentModal(symbol: string, ySymbol: string){
+    const twitr = fullDetails.filter( company => company.symbol === symbol )[0].twitter ;
 
     const modal = await this.modalCtrl.create({
       component: CompanyModalComponent,
       componentProps: {
         symbol,
-        twitter
+        twitr
       }
     }) ;
 

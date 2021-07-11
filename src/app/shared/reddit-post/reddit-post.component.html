@@ -10,7 +10,7 @@
       <span>· {{ post.created_utc | redditTime }}</span>
     </div>
 
-    <div class="awards-container">
+    <div class="awards-container" *ngIf="post.total_awards_received">
       <div class="award" *ngFor="let award of post.all_awardings.slice(0,4)">
         <img [src]="award.resized_icons[2].url">
       </div>
@@ -20,7 +20,7 @@
 
   <div class="post-body">
     <h6>{{ post.title }}</h6>
-    <span class="flair" [ngStyle]="{ backgroundColor: post.link_flair_background_color }">{{ post.link_flair_text }}</span>
+    <span *ngIf="post.link_flair_text" class="flair" [ngStyle]="{ backgroundColor: post.link_flair_background_color }">{{ post.link_flair_text }}</span>
     <p *ngIf="post.selftext !== ''">{{ post.selftext }}</p>
   </div>
 

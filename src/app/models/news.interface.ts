@@ -1,6 +1,6 @@
 import { Investing } from './reddit.investing.interface';
 import { WallStreetBets } from './reddit.wallstreet.interface';
-import { Data, Twitter } from './twitter.interface';
+import { Twitter } from './twitter.interface';
 
 export interface NewsAPI {
     code: number;

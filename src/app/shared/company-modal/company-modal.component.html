@@ -1,3 +1,48 @@
-<p>
-  company-modal works!
-</p>
+<div *ngIf="error" class="empty-container">
+  <img src="assets/images/not-found.svg">
+  <p>
+    Error occurred loading please try again!
+  </p>
+  <div>
+    <ion-button color="secondary">
+      <ion-icon name="reload-outline"></ion-icon>
+      <span>Retry</span>
+    </ion-button>
+    <ion-button color="danger" (click)="dismiss()">
+      <ion-icon name="close-circle-outline"></ion-icon>
+      <span>Close</span>
+    </ion-button>
+  </div>
+</div>
+
+<div class="empty-container" *ngIf="!error && loading">
+  <ion-spinner color="primary"></ion-spinner>
+</div>
+
+<div class="main-container" *ngIf="!error && !loading">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        {{ companyDetails.stock.name }}
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-button color="danger" (click)="dismiss()">Close</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+
+    <ion-toolbar>
+      <ion-slides [options]="sliderOptions">
+        <ion-slide *ngFor="let chip of chipHeaders; let i = index">
+          <ion-chip (click)="selectSlide(i)" [class.active-chip]="activeSlide === i">
+            <ion-icon [name]="iconList[i]" [color]="activeSlide === i ? 'light' : 'dark'"></ion-icon>
+            <ion-label>{{ chip }}</ion-label>
+          </ion-chip>
+        </ion-slide>
+      </ion-slides>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    
+  </ion-content>
+</div>

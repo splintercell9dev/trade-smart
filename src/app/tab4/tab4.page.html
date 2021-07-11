@@ -25,7 +25,7 @@
             <img defaultImage="assets/icon/loader.gif" [lazyLoad]="company.profileImageUrl">
           </ion-avatar>
   
-          <ion-label (click)="presentModal(company.symbol)">
+          <ion-label (click)="presentModal(company.symbol, company.YFSymbol)">
             <h3 class="company-name">{{ company.name }}</h3>
             <h5 class="company-code">{{ company.symbol }}</h5>
             <h2 class="company-stock-price">{{ company.price | currency: 'INR' }}</h2>

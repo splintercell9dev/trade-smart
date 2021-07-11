@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 export interface TwitterAPI {
-    twitter: Twitter[];
+    twitter: Twitter[] ;
 }
 
 export interface Twitter {
