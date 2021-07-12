@@ -266,7 +266,7 @@ export class StorageService {
 
   async loadCompanyFullData(symbol: string, twitter: null | Twitter): Promise<LoadInterFace | null>{
     try{
-      if (twitter){
+      if (twitter !== null){
         const details = await Filesystem.readFile({
           directory: Directory.Cache,
           path: `${INFO_PATH}/${PREFIX_INFO+symbol}.json`,

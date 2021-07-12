@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { News } from 'src/app/models/news.interface';
+import { Twitter } from 'src/app/models/twitter.interface';
 
 @Component({
   selector: 'app-company-social',
@@ -6,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./company-social.component.scss'],
 })
 export class CompanySocialComponent implements OnInit {
+  @Input() twitter: Twitter[] ;
+  @Input() news: News[] ;
+  hasTweets: boolean ;
 
-  constructor() { }
+  constructor() {
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.twitter);
+    if (this.twitter !== null && this.twitter[0].tweets.data.length){
+      this.hasTweets = true ;
+    }
+    else{
+      this.hasTweets = false ;
+    }
+  }
 
 }

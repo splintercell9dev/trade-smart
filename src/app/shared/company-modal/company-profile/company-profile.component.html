@@ -1,3 +1,85 @@
-<p>
-  company-profile works!
-</p>
+<div class="ion-padding">
+  <ion-item-divider class="ion-no-padding">
+    <ion-title class="ion-no-padding">Description</ion-title>
+  </ion-item-divider>
+  
+  <p class="company-description">
+    {{ profile.longBusinessSummary }}
+  </p>
+  
+  <ion-item-divider class="ion-no-padding ion-margin-top ion-margin-bottom">
+    <ion-title class="ion-no-padding">Key Executives</ion-title>
+  </ion-item-divider>
+  
+  <div class="company-officers">
+    <div class="officer-item" *ngFor="let person of profile.companyOfficers">
+      <div class="officer-name">{{ person.name }}</div>
+      <div class="officer-title">{{ person.title }}</div>
+      <div class="officer-pay">
+        Pay        : {{ person.totalPay?.fmt || 'N/A' }}
+      </div>
+      <div class="officer-exercised">
+        Exercised  : {{ person.exercisedValue?.longFmt || 'N/A' }}
+      </div>
+      <div class="officer-born">
+        Year Born  : {{ person?.yearBorn || 'N/A' }}
+      </div>
+    </div>
+  </div>
+
+  <ion-item-divider class="ion-no-padding ion-margin-top ion-margin-bottom">
+    <ion-title class="ion-no-padding">Company Details</ion-title>
+  </ion-item-divider>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4">Sector(s)</ion-col>
+      <ion-col>{{ profile.sector }}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="4">Industry</ion-col>
+      <ion-col>{{ profile.industry }}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="4">Employees</ion-col>
+      <ion-col>{{ profile.fullTimeEmployees }}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="4">Address</ion-col>
+      <ion-col>
+        <div>{{ profile.address1 }}</div>
+        <div>{{ profile.address2 }}</div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="4">City</ion-col>
+      <ion-col>{{ profile.city }}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="4">Pin Code</ion-col>
+      <ion-col>{{ profile.zip }}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="4">Country</ion-col>
+      <ion-col>{{ profile.country }}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="4">Phone</ion-col>
+      <ion-col>{{ profile.phone }}</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="4">Website</ion-col>
+      <ion-col>
+        <div>{{ profile.website }}</div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

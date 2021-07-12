@@ -1,0 +1,47 @@
+div.company-officers{
+    display: flex;
+    flex-direction: column;
+
+    div.officer-item{
+        color: var(--ion-color-medium) ;
+        margin-bottom: 10px;
+
+        div.officer-name{
+            font-size: 14pt;
+            font-weight: 700;
+        }
+
+        div.officer-title{
+            font-size: 10pt;
+            font-weight: 600;
+        }
+
+        div.officer-pay, div.officer-exercised, div.officer-born{
+            font-size: 8pt;
+            font-weight: 700;
+        }
+
+    }
+}
+
+ion-title{
+    color: #fff ;
+}
+
+p.company-description{
+    color: var(--ion-color-medium) ;
+}
+
+ion-grid{
+    ion-row{
+        &:nth-last-child(1){
+            flex-wrap: nowrap;
+        }
+
+        ion-col{
+            &:nth-child(2){
+                color: var(--ion-color-medium) ;
+            }
+        }
+    }
+}

@@ -1,3 +1,9 @@
-<p>
-  company-social works!
-</p>
+<div class="ion-padding">
+  <app-tweet *ngIf="hasTweets" [twitter]="twitter"></app-tweet>
+
+  <ion-item-divider class="ion-no-padding" [ngClass]="{ 'ion-margin-top': hasTweets, 'ion-margin-bottom': !hasTweets }">
+    <ion-title class="ion-no-padding">News</ion-title>
+  </ion-item-divider>
+
+  <app-news-card [news]="news"></app-news-card>
+</div>

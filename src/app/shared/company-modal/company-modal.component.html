@@ -19,34 +19,32 @@
   <ion-spinner color="primary"></ion-spinner>
 </div>
 
-<div class="main-container" *ngIf="!error && !loading">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>
-        {{ companyDetails.stock.name }}
-      </ion-title>
-      <ion-buttons slot="end">
-        <ion-button color="danger" (click)="dismiss()">Close</ion-button>
-      </ion-buttons>
-    </ion-toolbar>
+<ion-header *ngIf="!error && !loading">
+  <ion-toolbar>
+    <ion-title>
+      {{ companyDetails.stock.name }}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="danger" (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
 
-    <ion-toolbar>
-      <ion-slides [options]="sliderOptions">
-        <ion-slide *ngFor="let chip of chipHeaders; let i = index">
-          <ion-chip (click)="selectSlide(i)" [class.active-chip]="activeSlide === i">
-            <ion-icon [name]="iconList[i]" [color]="activeSlide === i ? 'light' : 'dark'"></ion-icon>
-            <ion-label>{{ chip }}</ion-label>
-          </ion-chip>
-        </ion-slide>
-      </ion-slides>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar>
+    <ion-slides [options]="sliderOptions">
+      <ion-slide *ngFor="let chip of chipHeaders; let i = index">
+        <ion-chip (click)="selectSlide(i)" [class.active-chip]="activeSlide === i">
+          <ion-icon [name]="iconList[i]" [color]="activeSlide === i ? 'light' : 'dark'"></ion-icon>
+          <ion-label>{{ chip }}</ion-label>
+        </ion-chip>
+      </ion-slide>
+    </ion-slides>
+  </ion-toolbar>
+</ion-header>
 
-  <ion-content>
-    <app-company-summary [stock]="company" [summary]="companyDetails.summaryDetail" *ngIf="activeSlide === 0"></app-company-summary>
-    <app-company-charts *ngIf="activeSlide === 1"></app-company-charts>
-    <app-company-finance *ngIf="activeSlide === 2"></app-company-finance>
-    <app-company-social *ngIf="activeSlide === 3"></app-company-social>
-    <app-company-profile *ngIf="activeSlide === 4"></app-company-profile>
-  </ion-content>
-</div>
+<ion-content *ngIf="!error && !loading">
+  <app-company-summary [stock]="company" [summary]="companyDetails.summaryDetail" *ngIf="activeSlide === 0"></app-company-summary>
+  <app-company-charts *ngIf="activeSlide === 1" [charts]="chartData"></app-company-charts>
+  <app-company-finance *ngIf="activeSlide === 2" [balanceSheet]="companyDetails.balanceSheetHistory" [incomeHistory]="companyDetails.incomeStatementHistory"></app-company-finance>
+  <app-company-social *ngIf="activeSlide === 3" [news]="news" [twitter]="twitter"></app-company-social>
+  <app-company-profile *ngIf="activeSlide === 4" [profile]="companyDetails.assetProfile"></app-company-profile>
+</ion-content>

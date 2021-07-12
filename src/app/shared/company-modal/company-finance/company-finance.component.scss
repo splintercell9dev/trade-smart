@@ -1,0 +1,32 @@
+ion-title{
+    color: #fff ;
+}
+
+div.metric-container{
+    margin-bottom: 10px;
+
+    h5{
+        font-size: 14pt;
+        color: var(--ion-color-medium) ;
+    }
+
+    ion-row{
+        ion-col{
+            &:nth-child(1){
+                text-transform: capitalize;
+                &.sheet-bold{
+                    font-weight: 700;
+                }
+
+                &:not(.sheet-bold){
+                    color: rgba(255, 255, 255, 0.76) ;
+                }
+            }
+
+            &:nth-child(2){
+                color: var(--ion-color-medium);
+            }
+
+        }
+    }
+}

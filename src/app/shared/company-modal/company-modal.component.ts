@@ -78,10 +78,10 @@ export class CompanyModalComponent implements OnInit {
 
     if (!result){
       console.log('inside api');
-      if (this.twitr){
+      if (this.twitr !== null){
         (await this.api.getCompanyFullDataWithTwitter(this.symbol)).subscribe(
           async (res: any) => {
-            console.log('inside set 4');
+            console.log('inside set full', res);
             this.companyDetails = res[0].details ;
             this.chartData['1d'] = res[1].chart ;
             this.news = res[2].news ;

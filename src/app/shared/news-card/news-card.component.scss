@@ -11,8 +11,9 @@ div.card-footer{
         font-size: 11pt;
         font-weight: 600;
         margin-right: 5px;
-        overflow-x: hidden;
-        flex-wrap: wrap;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     div.news-sentiment{

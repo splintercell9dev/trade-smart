@@ -38,6 +38,7 @@ export interface AssetProfile {
     governanceEpochDate:       number;
     compensationAsOfEpochDate: number;
     maxAge:                    number;
+    fax:                       string;
 }
 
 export interface CompanyOfficer {

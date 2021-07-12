@@ -66,12 +66,12 @@ export class ApiService {
           range: '1d'
         }
       }),
-      this.http.get<TwitterAPI>(`${apiBaseUrl}/news/company`, {
+      this.http.get<NewsAPI>(`${apiBaseUrl}/news/company`, {
         params: {
           name: company.name
         }
       }),
-      this.http.get<NewsAPI>(`${apiBaseUrl}/twitter/company/posts`, {
+      this.http.get<TwitterAPI>(`${apiBaseUrl}/twitter/company/posts`, {
         params: {
           symbol: sym
         }
