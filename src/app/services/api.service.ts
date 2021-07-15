@@ -100,4 +100,13 @@ export class ApiService {
       })
     ]) ;
   }
+
+  getChartValues(symbol: string, timeRange: '1d' | '5d' | '6mo' | '1y' | '5y' ){
+    return this.http.get<ChartDetails>(`${apiBaseUrl}/company/graph`, {
+      params: {
+        symbol: `${symbol}.NS`,
+        range: timeRange
+      }
+    }) ;
+  }
 }

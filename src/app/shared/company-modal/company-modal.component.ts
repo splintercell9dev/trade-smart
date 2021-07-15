@@ -53,13 +53,13 @@ export class CompanyModalComponent implements OnInit {
         indicators: [],
         timestamp: []
       },
-      '1yr': {
-        range: '1yr',
+      '1y': {
+        range: '1y',
         indicators: [],
         timestamp: []
       },
-      '5yr': {
-        range: '5yr',
+      '5y': {
+        range: '5y',
         indicators: [],
         timestamp: []
       }

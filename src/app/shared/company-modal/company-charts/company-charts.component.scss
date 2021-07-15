@@ -1,0 +1,13 @@
+ion-slides{
+    padding: 5px 0;
+}
+
+.active-chip{
+    --background: #fff ;
+    --color: var(--ion-color-light) ;
+    font-weight: 600;
+}
+
+div.chart-container{
+    height: calc(100% - 50px) ;
+}

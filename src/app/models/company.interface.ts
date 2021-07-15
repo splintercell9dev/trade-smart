@@ -210,7 +210,7 @@ export interface ChartDetails {
 }
 
 export interface Chart {
-    range:      '1d' | '5d' | '6mo' | '1yr' | '5yr';
+    range:      '1d' | '5d' | '6mo' | '1y' | '5y';
     timestamp:  number[] | [];
     indicators: number[] | [];
 }
@@ -219,8 +219,8 @@ export interface ChartFullDetails{
     '1d': Chart ;
     '5d': Chart ;
     '6mo': Chart ;
-    '1yr': Chart ;
-    '5yr': Chart ;
+    '1y': Chart ;
+    '5y': Chart ;
 }
 
 export interface LoadInterFace{

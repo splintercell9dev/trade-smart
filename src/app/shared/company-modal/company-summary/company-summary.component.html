@@ -30,37 +30,38 @@
 
     <ion-row>
       <ion-col>Volume</ion-col>
-      <ion-col>{{ summary.volume.fmt }}</ion-col>
+      <ion-col>{{ summary.volume?.fmt | summary }}</ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>Average Volume</ion-col>
-      <ion-col>{{ summary.averageVolume.fmt }}</ion-col>
+      <ion-col>{{ summary.averageVolume?.fmt | summary }}</ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>Market Cap</ion-col>
-      <ion-col>{{ summary.marketCap.fmt }}</ion-col>
+      <ion-col>{{ summary.marketCap?.fmt | summary }}</ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>Beta(5Y monthly)</ion-col>
-      <ion-col>{{ summary.beta.fmt }}</ion-col>
+      <ion-col>{{ summary.beta?.fmt | summary }}</ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>PE Ratio (TTM)</ion-col>
-      <ion-col>{{ summary.trailingPE.fmt }}</ion-col>
+      <ion-col>{{ summary.trailingPE?.fmt | summary }}</ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>Fwd divided & yield</ion-col>
-      <ion-col>{{ summary.trailingAnnualDividendRate.fmt }} ({{ summary.trailingAnnualDividendYield.fmt }})</ion-col>
+      <ion-col *ngIf="summary.trailingAnnualDividendRate?.fmt">{{ summary.trailingAnnualDividendRate.fmt }} ({{ summary.trailingAnnualDividendYield.fmt }})</ion-col>
+      <ion-col *ngIf="!summary.trailingAnnualDividendRate?.fmt">-</ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>Ex-dividend date</ion-col>
-      <ion-col>{{ summary.exDividendDate.fmt }}</ion-col>
+      <ion-col>{{ summary.exDividendDate?.fmt | summary }}</ion-col>
     </ion-row>
 
   </ion-grid>

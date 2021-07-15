@@ -1,5 +1,5 @@
 <div class="ion-padding">
-  <app-tweet *ngIf="hasTweets" [twitter]="twitter"></app-tweet>
+  <app-tweet *ngIf="hasTweets && twitter[0].tweets.data.length" [twitter]="twitter"></app-tweet>
 
   <ion-item-divider class="ion-no-padding" [ngClass]="{ 'ion-margin-top': hasTweets, 'ion-margin-bottom': !hasTweets }">
     <ion-title class="ion-no-padding">News</ion-title>

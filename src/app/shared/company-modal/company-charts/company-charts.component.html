@@ -1,3 +1,20 @@
-<p>
-  company-charts works!
-</p>
+<ion-slides [options]="chartSlideOptions">
+  <ion-slide *ngFor="let slide of chartSliders; let i = index ;">
+    <ion-chip (click)="selectChip(i)" [class.active-chip]="activeChip === i">
+      <ion-icon name="time-outline" [color]="activeChip === i ? 'light' : 'dark'"></ion-icon>
+      <ion-label>{{ slide }}</ion-label>
+    </ion-chip>
+  </ion-slide>
+</ion-slides>
+
+<div class="chart-container">
+  <canvas
+    #companyChart
+    baseChart
+    [options]="companyChartOptions"
+    [datasets]="companyChartData"
+    [labels]="companyChartLabels"
+    [colors]="companyChartColors"
+    [chartType]="'line'"
+  ></canvas>
+</div>

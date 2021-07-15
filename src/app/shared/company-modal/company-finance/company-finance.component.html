@@ -13,87 +13,87 @@
     <ion-grid>
       <ion-row>
         <ion-col>cash</ion-col>
-        <ion-col>{{ balance.cash.longFmt | finance }}</ion-col>
+        <ion-col>{{ balance.cash?.longFmt | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col>other investments</ion-col>
-        <ion-col>{{ balance.shortTermInvestments.longFmt | finance }}</ion-col>
+        <ion-col>{{ balance.shortTermInvestments?.longFmt | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col class="sheet-bold">total cash</ion-col>
-        <ion-col>{{ balance.cash.raw + balance.shortTermInvestments.raw | number }}</ion-col>
+        <ion-col>{{ balance.cash?.raw + balance.shortTermInvestments?.raw | number | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col>net recievables</ion-col>
-        <ion-col>{{ balance.netReceivables.longFmt | finance }}</ion-col>
+        <ion-col>{{ balance.netReceivables?.longFmt | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col>inventory</ion-col>
-        <ion-col>{{ balance.inventory.longFmt | finance }}</ion-col>
+        <ion-col>{{ balance.inventory?.longFmt | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col>other assets</ion-col>
-        <ion-col>{{ balance.otherCurrentAssets.longFmt | finance }}</ion-col>
+        <ion-col>{{ balance.otherCurrentAssets?.longFmt | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col class="sheet-bold">total current assets</ion-col>
-        <ion-col>{{ balance.totalCurrentAssets.longFmt | finance }}</ion-col>
+        <ion-col>{{ balance.totalCurrentAssets?.longFmt | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col>goodwill</ion-col>
-        <ion-col>{{ balance.goodWill.longFmt | finance }}</ion-col>
+        <ion-col>{{ balance.goodWill?.longFmt | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col>intangible assets</ion-col>
-        <ion-col>{{ balance.intangibleAssets.longFmt | finance }}</ion-col>
+        <ion-col>{{ balance.intangibleAssets?.longFmt | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col class="sheet-bold">total assets</ion-col>
-        <ion-col>{{ balance.totalAssets.longFmt | finance }}</ion-col>
+        <ion-col>{{ balance.totalAssets?.longFmt | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col>accounts payable</ion-col>
-        <ion-col>{{ balance.accountsPayable.longFmt | finance }}</ion-col>
+        <ion-col>{{ balance.accountsPayable?.longFmt | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col>other current liabilities</ion-col>
-        <ion-col>{{ balance.otherCurrentLiab.longFmt | finance }}</ion-col>
+        <ion-col>{{ balance.otherCurrentLiab?.longFmt | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col class="sheet-bold">total liabilities</ion-col>
-        <ion-col>{{ balance.totalLiab.longFmt | finance }}</ion-col>
+        <ion-col>{{ balance.totalLiab?.longFmt | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col>common stock</ion-col>
-        <ion-col>{{ balance.commonStock.longFmt | finance }}</ion-col>
+        <ion-col>{{ balance.commonStock?.longFmt | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col>retained earnings</ion-col>
-        <ion-col>{{ balance.retainedEarnings.longFmt | finance }}</ion-col>
+        <ion-col>{{ balance.retainedEarnings?.longFmt | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col>other stock equity</ion-col>
-        <ion-col>{{ balance.otherStockholderEquity.longFmt | finance }}</ion-col>
+        <ion-col>{{ balance.otherStockholderEquity?.longFmt | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col class="sheet-bold">total stock equity</ion-col>
-        <ion-col>{{ balance.totalStockholderEquity.longFmt | finance }}</ion-col>
+        <ion-col>{{ balance.totalStockholderEquity?.longFmt | finance }}</ion-col>
       </ion-row>
     </ion-grid>
   </div>
@@ -110,62 +110,62 @@
     <ion-grid>
       <ion-row>
         <ion-col>total revenue</ion-col>
-        <ion-col>{{ income.totalRevenue.longFmt | finance }}</ion-col>
+        <ion-col>{{ income.totalRevenue?.longFmt | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col>cost of revenue</ion-col>
-        <ion-col>{{ income.costOfRevenue.longFmt | finance }}</ion-col>
+        <ion-col>{{ income.costOfRevenue?.longFmt | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col>gross profit</ion-col>
-        <ion-col>{{ income.grossProfit.longFmt | finance }}</ion-col>
+        <ion-col>{{ income.grossProfit?.longFmt | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col>selling general and administrative</ion-col>
-        <ion-col>{{ income.sellingGeneralAdministrative.longFmt | finance }}</ion-col>
+        <ion-col>{{ income.sellingGeneralAdministrative?.longFmt | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col class="sheet-bold">total operating expenses</ion-col>
-        <ion-col>{{ income.totalOperatingExpenses.longFmt | finance }}</ion-col>
+        <ion-col>{{ income.totalOperatingExpenses?.longFmt | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col class="sheet-bold">operating income or loss</ion-col>
-        <ion-col>{{ income.operatingIncome.longFmt | finance }}</ion-col>
+        <ion-col>{{ income.operatingIncome?.longFmt | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col>interest expense</ion-col>
-        <ion-col>{{ income.interestExpense.longFmt | finance }}</ion-col>
+        <ion-col>{{ income.interestExpense?.longFmt | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col>income before tax</ion-col>
-        <ion-col>{{ income.incomeBeforeTax.longFmt | finance }}</ion-col>
+        <ion-col>{{ income.incomeBeforeTax?.longFmt | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col>income tax expense</ion-col>
-        <ion-col>{{ income.incomeTaxExpense.longFmt | finance }}</ion-col>
+        <ion-col>{{ income.incomeTaxExpense?.longFmt | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col>income from conitnuing operations</ion-col>
-        <ion-col>{{ income.netIncomeFromContinuingOps.longFmt | finance }}</ion-col>
+        <ion-col>{{ income.netIncomeFromContinuingOps?.longFmt | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col class="sheet-bold">net income</ion-col>
-        <ion-col>{{ income.netIncome.longFmt | finance }}</ion-col>
+        <ion-col>{{ income.netIncome?.longFmt | finance }}</ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col>net income available to common shareholders</ion-col>
-        <ion-col>{{ income.netIncomeApplicableToCommonShares.longFmt | finance }}</ion-col>
+        <ion-col>{{ income.netIncomeApplicableToCommonShares?.longFmt | finance }}</ion-col>
       </ion-row>
     </ion-grid>
 

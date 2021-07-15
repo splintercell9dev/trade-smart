@@ -17,7 +17,7 @@ export class CompanySocialComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.twitter);
-    if (this.twitter !== null && this.twitter[0].tweets.data.length){
+    if (this.twitter){
       this.hasTweets = true ;
     }
     else{

@@ -43,7 +43,7 @@
 
 <ion-content *ngIf="!error && !loading">
   <app-company-summary [stock]="company" [summary]="companyDetails.summaryDetail" *ngIf="activeSlide === 0"></app-company-summary>
-  <app-company-charts *ngIf="activeSlide === 1" [charts]="chartData"></app-company-charts>
+  <app-company-charts *ngIf="activeSlide === 1" [isNegative]="company.negative" [symbol]="symbol" [charts]="chartData"></app-company-charts>
   <app-company-finance *ngIf="activeSlide === 2" [balanceSheet]="companyDetails.balanceSheetHistory" [incomeHistory]="companyDetails.incomeStatementHistory"></app-company-finance>
   <app-company-social *ngIf="activeSlide === 3" [news]="news" [twitter]="twitter"></app-company-social>
   <app-company-profile *ngIf="activeSlide === 4" [profile]="companyDetails.assetProfile"></app-company-profile>
