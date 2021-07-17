@@ -1,10 +1,13 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { textChangeRangeIsUnchanged } from 'typescript';
 import { Bookmark, List } from '../models/search.interface';
 import { ApiService } from '../services/api.service';
 import { StorageService } from '../services/storage.service';
+import { CompanyModalComponent } from '../shared/company-modal/company-modal.component';
+import { fullDetails } from '../static/static-data';
 
 @Component({
   selector: 'app-tab3',
@@ -23,7 +26,7 @@ export class Tab3Page implements OnInit, OnDestroy{
 
   sub: Subscription ;
 
-  constructor(private api: ApiService, private storage: StorageService, private router: Router) {
+  constructor(private api: ApiService, private storage: StorageService, private router: Router, private modalCtrl: ModalController) {
     this.searchText = '' ;
     this.results = [] ;
   }
@@ -104,10 +107,25 @@ export class Tab3Page implements OnInit, OnDestroy{
       }
       return company ;
     }) ;
-    await this.storage.removeBookmark(c as List) ;
+    const hasTwitter = fullDetails.filter( company => company.symbol === c.symbol )[0].twitter !== null ? true : false ;
+    await this.storage.removeBookmark(c as List, hasTwitter) ;
   }
 
   trackByFn(index, item: Bookmark){
     return item.symbol ;
+  }
+
+  async presentModal(symbol: string, stock: List){
+    const twitr = fullDetails.filter( company => company.symbol === symbol )[0].twitter ;
+
+    const modal = await this.modalCtrl.create({
+      component: CompanyModalComponent,
+      componentProps: {
+        symbol,
+        company: stock
+      }
+    }) ;
+
+    return modal.present() ;
   }
 }

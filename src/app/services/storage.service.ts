@@ -195,7 +195,7 @@ export class StorageService {
     }
   }
 
-  async removeBookmark(company: List){
+  async removeBookmark(company: List, hasTwitter: boolean){
     try{
       if (this.bookmarks.length === 1){
         this.bookmarks = [] ;
@@ -214,7 +214,7 @@ export class StorageService {
       }) ;
 
       await this.toast.showNormalToast('Removed Bookmark', 1000) ;
-      await this.clearCache(company.symbol) ;
+      await this.clearCache(company.symbol, hasTwitter) ;
     }
     catch(err){
       console.log('error clearing bookmark');
@@ -402,7 +402,7 @@ export class StorageService {
     }
   }
 
-  async clearCache(sym: string){
+  async clearCache(sym: string, hasTwitter: boolean){
     try{
       await Filesystem.deleteFile({
         directory: Directory.Cache,
@@ -416,10 +416,13 @@ export class StorageService {
         directory: Directory.Cache,
         path: `${NEWS_PATH}/${PREFIX_NEWS+sym}.json`
       }) ;
-      await Filesystem.deleteFile({
-        directory: Directory.Cache,
-        path: `${TWITTER_PATH}/${PREFIX_TWITTER+sym}.json`
-      }) ;
+
+      if(hasTwitter){
+        await Filesystem.deleteFile({
+          directory: Directory.Cache,
+          path: `${TWITTER_PATH}/${PREFIX_TWITTER+sym}.json`
+        }) ;
+      } ;
 
       console.log('deleted symbol cache', sym);
     }

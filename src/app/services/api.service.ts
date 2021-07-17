@@ -9,7 +9,7 @@ import { NewsAPI } from '../models/news.interface';
 import { RedditInvestingAPI } from '../models/reddit.investing.interface';
 import { RedditWallStreetAPI } from '../models/reddit.wallstreet.interface';
 import { SearchRequest } from '../models/search.interface';
-import { Twitter, TwitterAPI } from '../models/twitter.interface';
+import { TwitterAPI } from '../models/twitter.interface';
 import { fullDetails } from '../static/static-data';
 
 @Injectable({

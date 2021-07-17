@@ -33,7 +33,8 @@ export class Tab4Page implements OnInit, OnDestroy {
   }
 
   async removeBookmarks(company: List){
-    await this.storage.removeBookmark(company) ;
+    const hasTwitter = fullDetails.filter( c => c.symbol === c.symbol )[0].twitter !== null ? true : false ;
+    await this.storage.removeBookmark(company, hasTwitter) ;
   }
 
   trackByFn(index, company: List){
