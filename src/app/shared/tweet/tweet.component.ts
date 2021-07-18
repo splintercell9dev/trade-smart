@@ -11,7 +11,9 @@ export class TweetComponent implements OnInit {
   @Input() twitter: Twitter[] ;
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.twitter);
+  }
 
   async shareTweet(username: string, tweet: Data){
     await Share.share({

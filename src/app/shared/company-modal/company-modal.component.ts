@@ -160,4 +160,50 @@ export class CompanyModalComponent implements OnInit {
     this.activeSlide = index ;
   }
 
+  async refresh(){
+    this.error = false ;
+    this.loading = true ;
+    if (this.twitr !== null){
+      (await this.api.getCompanyFullDataWithTwitter(this.symbol)).subscribe(
+        async (res: any) => {
+          console.log('inside set full', res);
+          this.companyDetails = res[0].details ;
+          this.chartData['1d'] = res[1].chart ;
+          this.news = res[2].news ;
+          this.twitter = res[3].twitter ;
+          console.log(this.twitter, this.news, res);
+          this.loading = false ;
+
+          await this.saveAllDetails() ;
+        },
+        (err) => {
+          console.log('failed to load data from api');
+          console.error(err);
+          this.error = true ;
+          this.loading = false ;
+        }
+        ) ;
+    }
+    else{
+      (await this.api.getCompanyFullDataWithoutTwitter(this.symbol)).subscribe(
+        async (res) => {
+          console.log('inside set 3');
+          this.companyDetails = res[0].details ;
+          this.chartData['1d'] = res[1].chart ;
+          this.news = res[2].news ;
+          this.twitter = [] ;
+
+          this.loading = false ;
+          await this.saveAllDetails() ;
+        },
+        (err) => {
+          console.log('failed to load data from api');
+          console.error(err);
+          this.error = true ;
+          this.loading = false ;
+        }
+      ) ;
+    }
+  }
+
 }

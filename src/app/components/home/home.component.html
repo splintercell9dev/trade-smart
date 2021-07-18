@@ -2,7 +2,7 @@
   <ion-refresher-content></ion-refresher-content>
 </ion-refresher>
 
-<div class="home-container" *ngIf="indexData && graphData">
+<div class="home-container" *ngIf="indexData && graphData && !error && !loading">
 
   <div class="data-last-updated">Last Updated: {{ lastUpdated | date: 'MMM dd, HH:mm' }}</div>
 
@@ -46,4 +46,15 @@
       </ion-grid>
     </ion-slide>
   </ion-slides>
+</div>
+
+<div class="error-container" *ngIf="error && !loading">
+  <img src="assets/images/not-found.svg">
+  <p>
+    Error occurred while loading, please <a (click)="retry()">try again</a>!
+  </p>
+</div>
+
+<div class="loading-container" *ngIf="loading && !error">
+  <ion-spinner color="primary"></ion-spinner>
 </div>

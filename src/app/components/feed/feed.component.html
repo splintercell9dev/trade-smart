@@ -2,7 +2,7 @@
   <ion-refresher-content></ion-refresher-content>
 </ion-refresher>
 
-<div class="feed-container" *ngIf="twitter && news && wallstreetbets && investing">
+<div class="feed-container" *ngIf="twitter && news && wallstreetbets && investing && !error && !loading">
   <div *ngIf="tab === 'twitter'" class="section-cards">
     <app-tweet [twitter]="twitter"></app-tweet>
   </div>
@@ -14,4 +14,15 @@
   <div *ngIf="tab === 'news'" class="section-cards">
     <app-news-card [news]="news"></app-news-card>
   </div>
+</div>
+
+<div class="error-container" *ngIf="error && !loading">
+  <img src="assets/images/not-found.svg">
+  <p>
+    Error occurred while loading, please <a (click)="retry()">try again</a>!
+  </p>
+</div>
+
+<div class="loading-container" *ngIf="loading && !error">
+  <ion-spinner color="primary"></ion-spinner>
 </div>

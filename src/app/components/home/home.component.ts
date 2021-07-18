@@ -18,7 +18,8 @@ export class HomeComponent implements OnInit {
     centeredSlides: true,
     spaceBetween: 25,
   } ;
-  failed = false ;
+  error = false ;
+  loading = true ;
   graphData: GraphData[] ;
   indexData: StockIndex[] ;
   currentIndexName = 'BSE SENSEX' ;
@@ -33,6 +34,8 @@ export class HomeComponent implements OnInit {
       this.lastUpdated = data.lastUpdated ;
       this.graphData = data.graph ;
       this.indexData = data.index ;
+      this.loading = false ;
+      this.error = false ;
     }
     else{
       this.api.getHomeData().subscribe(
@@ -41,6 +44,9 @@ export class HomeComponent implements OnInit {
           this.indexData = result[0].metrics.data ;
           this.graphData = result[1].metrics.data ;
 
+          this.loading = false ;
+          this.error = false ;
+
           await this.storage.saveHomeData({
             lastUpdated: result[0].metrics.lastUpdated,
             index: result[0].metrics.data,
@@ -48,7 +54,8 @@ export class HomeComponent implements OnInit {
           }) ;
         },
         (err) => {
-          this.failed = true ;
+          this.loading = false ;
+          this.error = true ;
           console.error(err);
         }
       ) ;
@@ -78,9 +85,34 @@ export class HomeComponent implements OnInit {
         event.target.complete() ;
       },
       (err) => {
-        this.failed = true ;
+        this.error = true ;
         console.error(err);
         event.target.complete() ;
+      }
+    ) ;
+  }
+
+  async retry(){
+    this.loading = true ;
+    this.error = false ;
+    this.api.getHomeData().subscribe(
+      async (result) => {
+        this.lastUpdated = result[0].metrics.lastUpdated ;
+        this.indexData = result[0].metrics.data ;
+        this.graphData = result[1].metrics.data ;
+
+        this.loading = false ;
+
+        await this.storage.saveHomeData({
+          lastUpdated: result[0].metrics.lastUpdated,
+          index: result[0].metrics.data,
+          graph: result[1].metrics.data
+        }) ;
+      },
+      (err) => {
+        this.loading = false ;
+        this.error = true ;
+        console.error(err);
       }
     ) ;
   }

@@ -20,7 +20,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "allowedCommonJsDependencies": [
-              "webpack/hot/emitter"
+              "webpack/hot/emitter",
+              "chart.js"
             ],
             "assets": [
               {

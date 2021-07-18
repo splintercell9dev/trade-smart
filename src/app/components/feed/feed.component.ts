@@ -17,6 +17,8 @@ export class FeedComponent implements OnInit {
   wallstreetbets: WallStreetBets[] ;
   investing: Investing[] ;
   news: News[] ;
+  error = false;
+  loading = true ;
 
   constructor(private api: ApiService, private storage: StorageService) { }
 
@@ -27,6 +29,8 @@ export class FeedComponent implements OnInit {
       this.wallstreetbets = data.reddit.wallstreetbets ;
       this.investing = data.reddit.investing ;
       this.news = data.news ;
+
+      this.loading = false ;
     }
     else{
       this.api.getFeedData().subscribe(
@@ -35,6 +39,8 @@ export class FeedComponent implements OnInit {
           this.wallstreetbets = result[1].reddit.data ;
           this.investing = result[2].reddit.data ;
           this.news = result[3].news ;
+
+          this.loading = false ;
 
           await this.storage.saveFeed({
             twitter: this.twitter,
@@ -46,6 +52,8 @@ export class FeedComponent implements OnInit {
           }) ;
         },
         (err) => {
+          this.loading = false ;
+          this.error = true ;
           console.error(err);
         }
       ) ;
@@ -76,6 +84,35 @@ export class FeedComponent implements OnInit {
       (err) => {
         console.error(err);
         event.target.complete() ;
+      }
+    ) ;
+  }
+
+  async retry(){
+    this.loading = true ;
+    this.error = false ;
+    this.api.getFeedData().subscribe(
+      async (result) => {
+        this.twitter = result[0].twitter ;
+        this.wallstreetbets = result[1].reddit.data ;
+        this.investing = result[2].reddit.data ;
+        this.news = result[3].news ;
+
+        this.loading = false ;
+
+        await this.storage.saveFeed({
+          twitter: this.twitter,
+          reddit: {
+            wallstreetbets: this.wallstreetbets,
+            investing: this.investing
+          },
+          news: this.news
+        }) ;
+      },
+      (err) => {
+        this.loading = false ;
+        this.error = true ;
+        console.error(err);
       }
     ) ;
   }
